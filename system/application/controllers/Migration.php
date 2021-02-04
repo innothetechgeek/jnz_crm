@@ -221,4 +221,16 @@ class Migration extends App_Controller
 
         echo '<h1>Total links replaced: ' . $affectedRows . '</h1>';
     }
+    public function index(){
+        // load migration library
+        $this->load->library('migration');
+
+        if ( ! $this->migration->current())
+        {
+            echo 'Error' . $this->migration->error_string();
+        } else {
+            echo 'Migrations ran successfully!';
+        }   
+         
+    }
 }

@@ -317,4 +317,11 @@ class Authentication extends ClientsController
             redirect(site_url());
         }
     }
+
+    public function agent_signup(){
+
+        $this->view('agentsignup');
+        $this->layout();
+
+    }
 }
