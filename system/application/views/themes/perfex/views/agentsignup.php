@@ -7,10 +7,7 @@
             background:#fff;
          }
      </style>
-
-
-
-     <div class="row justify-content-center mt-0" style =  "margin: auto;
+  <div class="row justify-content-center mt-0" style =  "margin: auto;
   width: 60%;
   padding: 10px;">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center p-0 mt-3 mb-2">
@@ -24,23 +21,41 @@
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Account</strong></li>
                                 <li id="personal"><strong>Personal</strong></li>
+                                <li id="address"><strong>Address</strong></li>
                                 <li id="personal"><strong>Next of Kin</strong></li>
                                 <li id="payment"><strong>Payment</strong></li>
-                                <li id="confirm"><strong>Finish</strong></li>
+                             
                             </ul> <!-- fieldsets -->
                             <fieldset>
                                 <div class="form-card">
-                                    <h2 class="fs-title">Account Information</h2>
-                                     <input type="email" name="email" placeholder="Email Id" />
-                                     <input type="password" name="cpwd" placeholder="Confirm Password" />
+                                    <h2 class="fs-title">Account Credentials</h2>
+                                     <input type="email" name="email" placeholder="Email" />
+                                     <input type="password" name="password" placeholder="Password" />
+                                     <input type="password" name="password_confirm" placeholder="Confirm Password" />
                                 </div> <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Personal Information</h2> <input type="text" name="fname" placeholder="First Name" /> 
-                                    <input type="text" name="lname" placeholder="Last Name" /> 
-                                    <input type="text" name="phno" placeholder="Contact No." /> 
-                                    <input type="text" name="phno_2" placeholder="Alternate Contact No." />
+                                     <input type="text" name="idnumber" placeholder="Identity Number" /> 
+                                    <input type="text" name="agent_name" placeholder="Name" /> 
+                                    <input type="text" name="suname" placeholder="Surname" /> 
+                                    <input type="number" name="agent_cellphone_number" placeholder="Cell Phone Number" /> 
+                                    <input type="number" name="landline_number" placeholder="Landline Number (if available)" /> 
+                                    <input type="email" name="email_address" placeholder="Email Address" /> 
+                                </div> 
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Postal Address</h2> <input type="text" name="fname" placeholder="First Name" /> 
+                                     <input type="text" name="idnumber" placeholder="Identity Number" /> 
+                                    <input type="text" name="agent_name" placeholder="Name" /> 
+                                    <input type="text" name="suname" placeholder="Surname" /> 
+                                    <input type="number" name="agent_cellphone_number" placeholder="Cell Phone Number" /> 
+                                    <input type="number" name="landline_number" placeholder="Landline Number (if available)" /> 
+                                    <input type="email" name="email_address" placeholder="Email Address" /> 
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
@@ -48,9 +63,9 @@
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Next Of Kin</h2> <input type="text" name="fname" placeholder="First Name" /> 
-                                    <input type="text" name="lname" placeholder="Last Name" /> 
-                                    <input type="text" name="phno" placeholder="Contact No." /> 
-                                    <input type="text" name="phno_2" placeholder="Alternate Contact No." />
+                                    <input type="text" name="nok_name" placeholder="Name" /> 
+                                    <input type="text" name="nok_surname" placeholder="Surname" /> 
+                                    <input type="text" name="nok_cell_number" placeholder="Cell No." />
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
@@ -179,12 +194,6 @@ $(document).ready(function(){
     })
     
     });
-
-
-
-
-
-
 </script>
 </body>
 </html>

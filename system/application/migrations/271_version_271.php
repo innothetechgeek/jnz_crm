@@ -17,6 +17,18 @@ class Migration_Version_271 extends CI_Migration
                         'type' => 'VARCHAR',
                         'constraint' => '200',
                   ),
+                  'agent_surname' => array(
+                        'type' => 'VARCHAR',
+                        'constraint' => '200',
+                  ),
+                  'agent_email' => array(
+                        'type' => 'VARCHAR',
+                        'constraint' => '200',
+                  ),
+                  'agent_idnumber' => array(
+                        'type' => 'VARCHAR',
+                        'constraint' => '200',
+                  ),
                   'agent_cellphone_number' => array(
                         'type' => 'VARCHAR',
                         'constraint' => '200',

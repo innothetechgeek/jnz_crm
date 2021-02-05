@@ -147,7 +147,11 @@ select.list-dt:focus {
 #progressbar .active {
     color: #000000
 }
-
+#address:before{
+    font-family: "Font Awesome 5 Free";
+   content: "\f015";
+  
+}
 #progressbar li {
     list-style-type: none;
     font-size: 12px;

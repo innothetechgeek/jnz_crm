@@ -1,25 +1,29 @@
 <?php
 
-class Migration_Version_273 extends CI_Migration
+class Migration_Version_275 extends CI_Migration
 {
     public function up()
     {
         
       $this->dbforge->add_field(array(
 
-            'answer_id' => array(
+            'nok_id' => array(
                   'type' => 'INT',
                   'constraint' => 10,
                   'unsigned' => TRUE,
                   'auto_increment' => TRUE
             ),
-            'answer' => array(
+            'nok_name' => array(
                   'type' => 'VARCHAR',
                   'constraint' => '200',
             ),
-            'fk_question_id' => array(
-                  'type' => 'INT',
-                  'constraint' => 10,
+            'nok_surname' => array(
+                  'type' => 'VARCHAR',
+                  'constraint' => '200',
+            ),
+            'nok_cell_number' => array(
+                  'type' => 'VARCHAR',
+                  'constraint' => '200',
             ),
             'fk_agent_id' => array(
                   'type' => 'INT',
@@ -27,7 +31,12 @@ class Migration_Version_273 extends CI_Migration
             ),
       ));
 
-      $this->dbforge->add_key('answer_id', TRUE);
-      $this->dbforge->create_table('agent_signup_answers');
+      $this->dbforge->add_key('nok_id', TRUE);
+      $this->dbforge->create_table('agent_next_of_kin');
    }
+
+   public function down(){
+
+   }
+
 }
