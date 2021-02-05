@@ -36,7 +36,7 @@
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">
-                                    <h2 class="fs-title">Personal Information</h2> <input type="text" name="fname" placeholder="First Name" /> 
+                                    <h2 class="fs-title">Personal Information</h2>
                                      <input type="text" name="idnumber" placeholder="Identity Number" /> 
                                     <input type="text" name="agent_name" placeholder="Name" /> 
                                     <input type="text" name="suname" placeholder="Surname" /> 
@@ -49,20 +49,19 @@
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">
-                                    <h2 class="fs-title">Postal Address</h2> <input type="text" name="fname" placeholder="First Name" /> 
-                                     <input type="text" name="idnumber" placeholder="Identity Number" /> 
-                                    <input type="text" name="agent_name" placeholder="Name" /> 
-                                    <input type="text" name="suname" placeholder="Surname" /> 
-                                    <input type="number" name="agent_cellphone_number" placeholder="Cell Phone Number" /> 
-                                    <input type="number" name="landline_number" placeholder="Landline Number (if available)" /> 
-                                    <input type="email" name="email_address" placeholder="Email Address" /> 
+                                    <h2 class="fs-title">Postal Address</h2>
+                                     <input type="text" name="address_line1" placeholder="Address Line1" /> 
+                                    <input type="text" name="address_line2" placeholder="Address line 2 (Optional)" /> 
+                                    <input type="text" name="city" placeholder="City/Town" /> 
+                                    <input type="text" name="province" placeholder="Landline Number (if available)" /> 
+                                    <input type="text" name="postal_code" placeholder="Postal Code" /> 
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">
-                                    <h2 class="fs-title">Next Of Kin</h2> <input type="text" name="fname" placeholder="First Name" /> 
+                                    <h2 class="fs-title">Next Of Kin</h2>
                                     <input type="text" name="nok_name" placeholder="Name" /> 
                                     <input type="text" name="nok_surname" placeholder="Surname" /> 
                                     <input type="text" name="nok_cell_number" placeholder="Cell No." />
