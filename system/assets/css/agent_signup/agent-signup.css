@@ -175,6 +175,11 @@ select.list-dt:focus {
     content: "\f09d"
 }
 
+#progressbar #questions:before {
+    font-family: FontAwesome;
+    content: "\f128"
+}
+
 #progressbar #confirm:before {
     font-family: FontAwesome;
     content: "\f00c"

@@ -23,7 +23,7 @@
                                 <li id="personal"><strong>Personal</strong></li>
                                 <li id="address"><strong>Address</strong></li>
                                 <li id="personal"><strong>Next of Kin</strong></li>
-                                <li id="payment"><strong>General Questions</strong></li>
+                                <li id="questions"><strong>General Questions</strong></li>
                                 <li id="payment"><strong>Payment</strong></li>
                             </ul> <!-- fieldsets -->
                             <fieldset>
@@ -107,7 +107,9 @@
                                             of using the iGEN APP. </li>
                                             <li>PLEASE NOTE EACH CAMPAIGN WILL HAVE ITS OWN TERMS AND
                                             CONDITIONS DEPENDING ON CAMPAIGN LAWS,</li>
+                                            <li><input  style = "width: initial; position:relative; top:1px;" type="checkbox" id="vehicle3" name="vehicle3" value="Boat"> <label for="vehicle3">I accept terms & conditions</label> </li>
                                         </ul>
+                                       
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="make_payment" class="next action-button" value="Confirm" />
