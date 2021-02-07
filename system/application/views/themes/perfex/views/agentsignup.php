@@ -16,7 +16,8 @@
                 <p>Fill all form field to go to next step</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                        <form id="msform">
+                        <form id="msform" action = "agent_signup" method = "POST">
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Account</strong></li>
@@ -29,7 +30,7 @@
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Account Credentials</h2>
-                                     <input type="email" name="email" placeholder="Email" />
+                                     <input type="email" name="agent_email" placeholder="Email" />
                                      <input type="password" name="password" placeholder="Password" />
                                      <input type="password" name="password_confirm" placeholder="Confirm Password" />
                                 </div> <input type="button" name="next" class="next action-button" value="Next Step" />
@@ -112,7 +113,7 @@
                                        
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
-                                <input type="button" name="make_payment" class="next action-button" value="Confirm" />
+                                <input type="submit" name="make_payment" class="next action-button" value="Confirm" />
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">

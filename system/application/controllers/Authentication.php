@@ -349,7 +349,7 @@ class Authentication extends ClientsController
             'agent_landline' => $this->input->post('agent_landline'),
         ];
 
-        return $this->db->insert('mytable', $data);
+        return $this->db->insert('tblagents', $data);
 
     }
 
@@ -367,7 +367,7 @@ class Authentication extends ClientsController
             'fk_agent_id' => $agent_id
         ];
 
-        $this->db->insert('mytable', $data);
+        $this->db->insert('tblagent_next_of_kin', $data);
 
     }
 
@@ -383,7 +383,7 @@ class Authentication extends ClientsController
                 'fk_agent_id' => $agent_id
             ];
 
-            $this->db->insert('mytable', $data);
+            $this->db->insert('tblagent_signup_answers', $data);
         }
 
     }
