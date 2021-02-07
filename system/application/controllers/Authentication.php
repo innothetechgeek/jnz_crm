@@ -320,7 +320,12 @@ class Authentication extends ClientsController
 
     public function agent_signup(){
 
+        $questions = $this->db->get('tblagent_signup_questions')->result();
+        $data['questions'] = $questions;
+        // die();
+        $this->data($data);
         $this->view('agentsignup');
+      
         $this->layout();
 
     }
