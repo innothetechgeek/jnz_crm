@@ -37,12 +37,11 @@
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Personal Information</h2>
-                                     <input type="text" name="idnumber" placeholder="Identity Number" /> 
+                                     <input type="text" name="agent_idnumber" placeholder="Identity Number" /> 
                                     <input type="text" name="agent_name" placeholder="Name" /> 
                                     <input type="text" name="suname" placeholder="Surname" /> 
                                     <input type="number" name="agent_cellphone_number" placeholder="Cell Phone Number" /> 
-                                    <input type="number" name="landline_number" placeholder="Landline Number (if available)" /> 
-                                    <input type="email" name="email_address" placeholder="Email Address" /> 
+                                    <input type="number" name="agent_landline" placeholder="Landline Number (if available)" /> 
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
@@ -73,7 +72,8 @@
                                 <div class="form-card">
                                    <?php foreach($questions as $question){ ?>
                                     <?php  echo $question->question ?>
-                                    <input type="text" name="question[$question->id]" /> 
+                                    <?php $question_id = $question->question_id ?>
+                                    <input type="text" name="question_anwsers[<?=$question_id?>]" /> 
 
                                    <?php } ?>
                                 </div> 
