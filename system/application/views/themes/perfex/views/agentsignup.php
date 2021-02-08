@@ -21,13 +21,13 @@
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Account</strong></li>
-                                <li id="personal"><strong>Personal</strong></li>
-                                <li id="address"><strong>Address</strong></li>
-                                <li id="personal"><strong>Next of Kin</strong></li>
-                                <li id="questions"><strong>General Questions</strong></li>
-                                <li id="payment"><strong>Payment</strong></li>
+                                <li  class="step" id="personal"><strong>Personal</strong></li>
+                                <li  class="step" id="address"><strong>Address</strong></li>
+                                <li  class="step" id="personal"><strong>Next of Kin</strong></li>
+                                <li  class="step" id="questions"><strong>General Questions</strong></li>
+                                <li  class="step" id="payment"><strong>Payment</strong></li>
                             </ul> <!-- fieldsets -->
-                            <fieldset>
+                            <fieldset class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Account Credentials</h2>
                                      <input type="email" name="agent_email" placeholder="Email" />
@@ -35,7 +35,7 @@
                                      <input type="password" name="password_confirm" placeholder="Confirm Password" />
                                 </div> <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Personal Information</h2>
                                      <input type="text" name="agent_idnumber" placeholder="Identity Number" /> 
@@ -47,19 +47,18 @@
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Postal Address</h2>
-                                     <input type="text" name="address_line1" placeholder="Address Line1" /> 
-                                    <input type="text" name="address_line2" placeholder="Address line 2 (Optional)" /> 
-                                    <input type="text" name="city" placeholder="City/Town" /> 
-                                    <input type="text" name="province" placeholder="Landline Number (if available)" /> 
-                                    <input type="text" name="postal_code" placeholder="Postal Code" /> 
+                                     <input type="text" name="add_line1" placeholder="Address Line1" /> 
+                                    <input type="text" name="add_line2" placeholder="Address line 2 (Optional)" /> 
+                                    <input type="text" name="add_city" placeholder="City/Town" /> 
+                                    <input type="text" name="add_postal_code" placeholder="Postal Code" /> 
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Next Of Kin</h2>
                                     <input type="text" name="nok_name" placeholder="Name" /> 
@@ -69,7 +68,7 @@
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="tab">
                                 <div class="form-card">
                                    <?php foreach($questions as $question){ ?>
                                     <?php  echo $question->question ?>
@@ -81,7 +80,7 @@
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Terms And Conditions</h2>
                                         <ul class = "agent-signup-terms">
@@ -115,7 +114,7 @@
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="submit" name="make_payment" class="next action-button" value="Confirm" />
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title text-center">Success !</h2> <br><br>
                                     <div class="row justify-content-center">
@@ -141,10 +140,23 @@ $(document).ready(function(){
 
   
     var current_fs, next_fs, previous_fs; //fieldsets
+    var step = 0;
     var opacity;
+
+    $('input').focus(function () {
+        $(this).removeClass('invalid');
+
+    })
+   
     
+    //user clicks on next
     $(".next").click(function(){
     
+     /* validates form   */
+     if (!validateForm()) return false;
+     step = step + 1; //increase current step y 1
+
+
     current_fs = $(this).parent();
     next_fs = $(this).parent().next();
     
@@ -170,6 +182,8 @@ $(document).ready(function(){
     });
     
     $(".previous").click(function(){
+    
+        step = step - 1;
     
     current_fs = $(this).parent();
     previous_fs = $(this).parent().prev();
@@ -204,6 +218,33 @@ $(document).ready(function(){
     $(".submit").click(function(){
     return false;
     })
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[step].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+            // add an "invalid" class to the field:
+            y[i].className += " invalid";
+            // and set the current valid status to false:
+            valid = false;
+            }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[step].className += " finish";
+        }
+        return valid; // return the valid status
+    }
+
+
+
+
+
     
     });
 </script>

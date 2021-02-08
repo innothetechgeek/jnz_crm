@@ -31,6 +31,13 @@ class Authentication_model extends App_Model
             }
             $this->db->where('email', $email);
             $user = $this->db->get($table)->row();
+
+            //agent login
+            if(!$user){
+                $this->db->where('agent_email', $email);
+                $user = $this->db->get('tblagents')->row();
+            }
+            
             if ($user) {
                 // Email is okey lets check the password now
                 if (!app_hasher()->CheckPassword($password, $user->password)) {
@@ -103,16 +110,24 @@ class Authentication_model extends App_Model
             }
             $this->session->set_userdata($user_data);
 
+          
             if (!$twoFactorAuth) {
                 if ($remember) {
                     $this->create_autologin($user->$_id, $staff);
                 }
+                
+                if(!$user->agent_name){ //if not agent
+                   
+                    $this->update_login_info($user->$_id, $staff);
 
-                $this->update_login_info($user->$_id, $staff);
+                }else{
+
+
+                }
+               
             } else {
                 return ['two_factor_auth' => true, 'user' => $user];
             }
-
             return true;
         }
 
@@ -219,6 +234,7 @@ class Authentication_model extends App_Model
                             'value'  => $cookie,
                             'expire' => 60 * 60 * 24 * 31 * 2, // 2 months
                         ]);
+
                         $this->update_login_info($user->id, $user->staff);
 
                         return true;

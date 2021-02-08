@@ -58,9 +58,8 @@ class Authentication extends ClientsController
             $this->load->model('announcements_model');
             $this->announcements_model->set_announcements_as_read_except_last_one(get_contact_user_id());
 
-            hooks()->do_action('after_contact_login');
-
             maybe_redirect_to_previous_url();
+            
             redirect(site_url());
         }
         if (get_option('allow_registration') == 1) {
@@ -325,8 +324,19 @@ class Authentication extends ClientsController
             $agent_id = $this->create_agent();
             $this->create_agent_next_of_kin($agent_id);
             $this->create_agent_answers($agent_id);
-        }
+            $this->create_agent_address($agent_id);
 
+            $payment_ref = $this->input->post('agent_name')." ".$this->input->post('suname');
+            $this->generate_swify_payment_link($this->input->post('agent_cellphone_number'),$payment_ref);
+            
+
+            //registration email to admin
+            $this->sendAgentRegistrationEmail();
+            redirect('authentication/agent_signup_successful');
+          
+            $this->layout();
+        }
+    
         $questions = $this->db->get('tblagent_signup_questions')->result();
         $data['questions'] = $questions;
         
@@ -337,33 +347,55 @@ class Authentication extends ClientsController
 
     }
 
+    public function agent_signup_successful(){
+
+        $this->view('agentsignup_successful');
+      
+        $this->layout();
+    }
+
     public function create_agent(){
 
         $data = [
             'agent_name' => $this->input->post('agent_name'), 
-            'password' => $this->input->post('password'),
+            'password' => app_hash_password($this->input->post('password')),
             'agent_surname' => $this->input->post('suname'),
             'agent_email' => $this->input->post('agent_email'),
             'agent_idnumber' => $this->input->post('agent_idnumber'),
             'agent_cellphone_number' => $this->input->post('agent_cellphone_number'),
             'agent_landline' => $this->input->post('agent_landline'),
+            'active' => 1
         ];
 
-        return $this->db->insert('tblagents', $data);
+        $this->db->insert('tblagents', $data);
+        $insert_id = $this->db->insert_id();
+
+        return  $insert_id;
 
     }
 
     public function create_agent_address($agent_id){
 
-       
+      
+        $data = [
+            'add_line1' => $this->input->post('add_line1'), 
+            'add_line2' => $this->input->post('add_line2'),
+            'add_city' => $this->input->post('add_city'),
+            'add_type' => 1, //postal address
+            'add_postal_code' => $this->input->post('add_postal_code'),
+            'fk_agent_id' => $agent_id
+        ];
+
+        $this->db->insert('tblagent_address', $data);
+
     }
 
     public function create_agent_next_of_kin($agent_id){
 
         $data = [
-            'nok_name' => $this->input->post('agent_name'), 
-            'nok_surname' => $this->input->post('password'),
-            'nok_cell_number' => $this->input->post('password'),
+            'nok_name' => $this->input->post('nok_name'), 
+            'nok_surname' => $this->input->post('nok_surname'),
+            'nok_cell_number' => $this->input->post('nok_cell_number'),
             'fk_agent_id' => $agent_id
         ];
 
@@ -386,5 +418,112 @@ class Authentication extends ClientsController
             $this->db->insert('tblagent_signup_answers', $data);
         }
 
+    }
+
+    public function generate_swify_payment_link($mobile,$payment_ref){
+
+            $type = 1;
+            $amount = 149;
+            $whatsapp = '';
+            $contact_type = 'sms';
+            
+            if($type == 1){
+                // $contact_type = 'sms';
+                // $mobile = '0833968710';
+            }elseif($type == 2) {
+                // $contact_type = 'email';
+                // $email = 'jamie@jnz.co.za';
+            }elseif($type == 3){
+                // $contact_type = 'whatsapp';
+                // $whatsapp = 'whatsapp';
+            }else{
+                $contact_type = '';
+            }
+            
+            $addvars = array(
+                'amount' => $amount,
+                'payment_reference' => $payment_ref,
+                'own_amount' => '',
+                'merchant_id' => '',
+                'mobile' => $mobile,
+                'email' => $email,
+                'success_url' => '',
+                'error_url' => '',
+                'cancel_url' => '',
+                'notify_url' => '',
+                'recurring_start_day' => 31,
+                'send' => 1,
+                'contact_type' => $contact_type,
+            );
+            
+            $auth = base64_encode('jnzapi:jnzapi2020!');
+            // echo $auth; exit;
+            $request_url_base = "https://pay.swiffy.co.za/api";
+            $endpoint = "/v1/swiffy/recurring/payment-schedule";
+
+            $verify_hostname = false;
+            $curl = curl_init();
+            
+            curl_setopt_array($curl,
+            array(
+                    CURLOPT_URL => $request_url_base.$endpoint,
+                    CURLOPT_SSL_VERIFYPEER => $verify_hostname,
+                    CURLOPT_SSL_VERIFYHOST => $verify_hostname,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array("Authorization: Basic $auth",'Accept: application/json'),
+                    CURLOPT_POSTFIELDS => $addvars,
+                    )
+            );
+
+            $reply = curl_exec( $curl );
+        
+            if(! $reply) {
+                    echo curl_error($curl);
+                    curl_close($curl);
+                    exit;
+            }
+           
+            $response = json_decode($reply, true);
+        
+        
+            curl_close($curl);
+    
+    }
+    
+    public function sendAgentRegistrationEmail(){
+
+        $data = $_POST;
+        $this->load->library('email');
+        $fromemail="innosela@gmail.com";
+        $toemail = "innothetechgeek@gmail.com";
+        $subject = "Mail Subject is here";
+        // $mesg = $this->load->view('template/email',$data,true);
+        // or
+        $mesg = $this->load->view('email/agentsignup',$data,true);
+        
+        $config=array(
+
+            'charset'=>'utf-8',
+            'wordwrap'=> TRUE,
+            'mailtype' => 'html',
+            // Host
+            'smtp_host' =>'smtp.mailtrap.io',
+            // Port
+            'smtp_port' => 2525,
+            // User
+            'SMTPUser' => 'b5016198047a1d',
+            // Pass
+            'smtp_pass' => 'b08c6fc050f2e5',
+            'newline' => "\r\n",
+
+        );
+ 
+        $this->email->initialize($config);
+        
+        $this->email->to($toemail);
+        $this->email->from($fromemail, "Title");
+        $this->email->subject($subject);
+        $this->email->message($mesg);
+        $mail = $this->email->send();
     }
 }
