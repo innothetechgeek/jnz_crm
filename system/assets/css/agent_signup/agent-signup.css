@@ -155,7 +155,7 @@ select.list-dt:focus {
 #progressbar li {
     list-style-type: none;
     font-size: 12px;
-    width: 19%;
+    width: 16%;
     float: left;
     position: relative
 }
@@ -173,6 +173,11 @@ select.list-dt:focus {
 #progressbar #payment:before {
     font-family: FontAwesome;
     content: "\f09d"
+}
+
+#progressbar #questions:before {
+    font-family: FontAwesome;
+    content: "\f128"
 }
 
 #progressbar #confirm:before {
@@ -237,4 +242,8 @@ select.list-dt:focus {
 .fit-image {
     width: 100%;
     object-fit: cover
+}
+
+.agent-signup-terms li{
+    margin-bottom:10px;
 }

@@ -320,8 +320,71 @@ class Authentication extends ClientsController
 
     public function agent_signup(){
 
+        if ($this->input->post()) {
+
+            $agent_id = $this->create_agent();
+            $this->create_agent_next_of_kin($agent_id);
+            $this->create_agent_answers($agent_id);
+        }
+
+        $questions = $this->db->get('tblagent_signup_questions')->result();
+        $data['questions'] = $questions;
+        
+        $this->data($data);
         $this->view('agentsignup');
+      
         $this->layout();
+
+    }
+
+    public function create_agent(){
+
+        $data = [
+            'agent_name' => $this->input->post('agent_name'), 
+            'password' => $this->input->post('password'),
+            'agent_surname' => $this->input->post('suname'),
+            'agent_email' => $this->input->post('agent_email'),
+            'agent_idnumber' => $this->input->post('agent_idnumber'),
+            'agent_cellphone_number' => $this->input->post('agent_cellphone_number'),
+            'agent_landline' => $this->input->post('agent_landline'),
+        ];
+
+        return $this->db->insert('tblagents', $data);
+
+    }
+
+    public function create_agent_address($agent_id){
+
+       
+    }
+
+    public function create_agent_next_of_kin($agent_id){
+
+        $data = [
+            'nok_name' => $this->input->post('agent_name'), 
+            'nok_surname' => $this->input->post('password'),
+            'nok_cell_number' => $this->input->post('password'),
+            'fk_agent_id' => $agent_id
+        ];
+
+        $this->db->insert('tblagent_next_of_kin', $data);
+
+    }
+
+    public function create_agent_answers($agent_id){
+
+        $question_answers = $this->input->post('question_anwsers');
+
+        foreach( $question_answers as $question_id => $unswer){
+
+            $data = [
+                'answer' => $unswer, 
+                'fk_question_id' => $question_id,
+                'fk_agent_id' => $agent_id
+            ];
+
+            $this->db->insert('tblagent_signup_answers', $data);
+        }
 
     }
 }
