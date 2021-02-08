@@ -120,9 +120,6 @@ class Authentication_model extends App_Model
                    
                     $this->update_login_info($user->$_id, $staff);
 
-                }else{
-
-
                 }
                
             } else {
