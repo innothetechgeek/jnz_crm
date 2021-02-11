@@ -156,6 +156,8 @@ $route['login']           = 'authentication/login';
 $route['logout']          = 'authentication/logout';
 $route['register']        = 'authentication/register';
 
+$route['agents'] = 'agents';
+
 /**
  * Terms and conditions and Privacy Policy routes
  */

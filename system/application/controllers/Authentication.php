@@ -356,19 +356,29 @@ class Authentication extends ClientsController
 
     public function create_agent(){
 
+
         $data = [
-            'agent_name' => $this->input->post('agent_name'), 
-            'password' => app_hash_password($this->input->post('password')),
-            'agent_surname' => $this->input->post('suname'),
-            'agent_email' => $this->input->post('agent_email'),
-            'agent_idnumber' => $this->input->post('agent_idnumber'),
-            'agent_cellphone_number' => $this->input->post('agent_cellphone_number'),
-            'agent_landline' => $this->input->post('agent_landline'),
-            'active' => 1
+            'city' => $this->input->post('add_line1'), 
+            'zip' =>  $this->input->post('add_postal_code'),
+            'state' => $this->input->post('agent_landline'),
+            'address' => $this->input->post('add_line1') ."</br>".$this->input->post('add_city'). "<br/>" .$this->input->post('add_postal_code'),
         ];
 
-        $this->db->insert('tblagents', $data);
+        $this->db->insert('tblclients', $data);
         $insert_id = $this->db->insert_id();
+
+        $data = [
+            'firstname' => $this->input->post('agent_name'), 
+            'lastname' =>  $this->input->post('suname'),
+            'phonenumber' => $this->input->post('agent_cellphone_number'),
+            'idnumber' => $this->input->post('agent_idnumber'),
+            'email' =>  $this->input->post('agent_email'),
+            'userid' => $insert_id,
+            'password' => app_hash_password($this->input->post('password'))
+        ];
+
+        $this->db->insert('tblcontacts', $data);
+
 
         return  $insert_id;
 
