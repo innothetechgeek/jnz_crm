@@ -7,7 +7,7 @@
             background:#fff;
          }
      </style>
-  <div class="row justify-content-center mt-0" style =  "margin: auto;
+  <div class="row justify-content-center mt-0" id ="mainRow" style =  "margin: auto;
   width: 60%;
   padding: 10px;">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center p-0 mt-3 mb-2">
