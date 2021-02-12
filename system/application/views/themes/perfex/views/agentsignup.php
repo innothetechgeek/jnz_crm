@@ -27,38 +27,38 @@
                                 <li  class="step" id="questions"><strong>General Questions</strong></li>
                                 <li  class="step" id="payment"><strong>Payment</strong></li>
                             </ul> <!-- fieldsets -->
-                            <fieldset class="tab">
+                            <fieldset id = "step1" class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Account Credentials</h2>
                                      <input type="email" name="agent_email" placeholder="Email" />
-                                     <input type="password" name="password" placeholder="Password" />
-                                     <input type="password" name="password_confirm" placeholder="Confirm Password" />
+                                     <input id = "password" type="password" name="password" placeholder="Password" />
+                                     <input id = "password_confirm" type="password" name="password_confirm" placeholder="Confirm Password" />
                                 </div> <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset class="tab">
+                            <fieldset id = "step2" class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Personal Information</h2>
                                      <input type="text" name="agent_idnumber" placeholder="Identity Number" /> 
                                     <input type="text" name="agent_name" placeholder="Name" /> 
                                     <input type="text" name="suname" placeholder="Surname" /> 
                                     <input type="number" name="agent_cellphone_number" placeholder="Cell Phone Number" /> 
-                                    <input type="number" name="agent_landline" placeholder="Landline Number (if available)" /> 
+                                    <input type="number"  data-not-required = "true" name="agent_landline" placeholder="Landline Number (if available)" /> 
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset class="tab">
+                            <fieldset id = "step3" class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Postal Address</h2>
                                      <input type="text" name="add_line1" placeholder="Address Line1" /> 
-                                    <input type="text" name="add_line2" placeholder="Address line 2 (Optional)" /> 
+                                    <input type="text" data-not-required = "true" name="add_line2" placeholder="Address line 2 (Optional)" /> 
                                     <input type="text" name="add_city" placeholder="City/Town" /> 
                                     <input type="text" name="add_postal_code" placeholder="Postal Code" /> 
                                 </div> 
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset class="tab">
+                            <fieldset id = "step4" class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Next Of Kin</h2>
                                     <input type="text" name="nok_name" placeholder="Name" /> 
@@ -68,7 +68,7 @@
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset class="tab">
+                            <fieldset id = "step5" class="tab">
                                 <div class="form-card">
                                    <?php foreach($questions as $question){ ?>
                                     <?php  echo $question->question ?>
@@ -80,7 +80,7 @@
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset class="tab">
+                            <fieldset  id = "step6" class="tab">
                                 <div class="form-card">
                                     <h2 class="fs-title">Terms And Conditions</h2>
                                         <ul class = "agent-signup-terms">
@@ -107,7 +107,7 @@
                                             of using the iGEN APP. </li>
                                             <li>PLEASE NOTE EACH CAMPAIGN WILL HAVE ITS OWN TERMS AND
                                             CONDITIONS DEPENDING ON CAMPAIGN LAWS,</li>
-                                            <li><input  style = "width: initial; position:relative; top:1px;" type="checkbox" id="vehicle3" name="vehicle3" value="Boat"> <label for="vehicle3">I accept terms & conditions</label> </li>
+                                            <li><input  style = "width: initial; position:relative; top:1px;" type="checkbox" id="termsCheckBox" name="termsCheckBox"> <label for="terms">I accept terms & conditions</label> </li>
                                         </ul>
                                        
                                 </div> 
@@ -140,7 +140,7 @@ $(document).ready(function(){
 
   
     var current_fs, next_fs, previous_fs; //fieldsets
-    var step = 0;
+    var step = 1;
     var opacity;
 
     $('input').focus(function () {
@@ -154,7 +154,8 @@ $(document).ready(function(){
     
      /* validates form   */
      if (!validateForm()) return false;
-     step = step + 1; //increase current step y 1
+     //increase current step y 1
+     step = step + 1; 
 
 
     current_fs = $(this).parent();
@@ -222,31 +223,52 @@ $(document).ready(function(){
     function validateForm() {
         // This function deals with validation of the form fields
         var x, y, i, valid = true;
-        x = document.getElementsByClassName("tab");
-        y = x[step].getElementsByTagName("input");
-        // A loop that checks every input field in the current tab:
+        x = document.getElementById("step"+step);
+
+        y = x.getElementsByTagName("input");
+
+      
+       // A loop that checks every input field in the current tab:
         for (i = 0; i < y.length; i++) {
-            // If a field is empty...
-            if (y[i].value == "") {
-            // add an "invalid" class to the field:
-            y[i].className += " invalid";
-            // and set the current valid status to false:
-            valid = false;
+          
+          
+           if(y[i].getAttribute("data-not-required") != "true"){
+
+                if (y[i].value == "") {
+                    // add an "invalid" class to the field:
+                    y[i].className += " invalid";
+                    // and set the current valid status to false:
+                    valid = false;
+                }
+           }
+
+        }
+
+        if(step == 1){
+            if($('#password').val() != $('#password_confirm').val()){
+                
+                alert("Password confirmation doesn't match password");
+                valid = false;
             }
         }
+        
+
+        //accept terms and conditions
+        if(step == 6){
+            if(document.querySelector('#termsCheckBox:checked') == null){
+                alert('You must accept terms and conditions');
+               return false
+            }
+        }
+
         // If the valid status is true, mark the step as finished and valid:
         if (valid) {
-            document.getElementsByClassName("step")[step].className += " finish";
+            document.getElementsByClassName("step")[step-1].className += " finish";
         }
         return valid; // return the valid status
     }
 
-
-
-
-
-    
-    });
+});
 </script>
 </body>
 </html>

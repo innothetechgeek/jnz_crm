@@ -28,8 +28,8 @@
                     <td  valign="top">
                         <table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailHeader" >
                             <tr >
-                                <td style = "border-top: 4px solid #00cc83; border-bottom:2px solid #f2f3f5;"  valign="top" >
-                                    <img width = "150" alt="" src="https://vanguard-wealth.com/upload/orig/logo_49391.png"> 
+                                <td style = "border-top: 4px solid #51647c; border-bottom:2px solid #51647c;"  valign="top" >
+                                    <!-- <img width = "150" alt="" src="https://vanguard-wealth.com/upload/orig/logo_49391.png">  -->
                                 </td>
                             </tr>
                         </table>
@@ -40,55 +40,62 @@
                         <table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailBody">
                             <tr>
                                 <td  valign="top">
-                                    Hi <span  style = "color: #28A745">Admin</span>
+                                    Hi <span>Admin, a new agent has signed up. Below are thier details:</span>
+                                   
                                     <p>Personal Details.</p>
                                         <ul style = "list-style-type:none;padding:0px;line-height:1.5">
                                             <li>
-                                                Name: <span  style = "color: #28A745"><strong><?= $data['agent_name'] ?></strong></span>
+                                                Name: <span  style = "color: #51647c"><strong><?= $data['agent_name'] ?></strong></span>
                                             </li>
                                             <li>
-                                                Surname: <span  style = "color: #28A745"><strong><?= $data['agent_landline'] ?></strong></span>
+                                                Surname: <span  style = "color: #51647c"><strong><?= $data['agent_landline'] ?></strong></span>
                                             </li>
                                             <li>
-                                                Id Number: <span  style = "color: #28A745"><strong><?= $data['agent_idnumber'] ?></strong></span>
+                                                Id Number: <span  style = "color: #51647c"><strong><?= $data['agent_idnumber'] ?></strong></span>
                                             </li>
                                             <li>
-                                                Cell Nr: <span  style = "color: #28A745"><strong><?= $data['agent_cellphone_number'] ?></strong></span>
+                                                Cell Nr: <span  style = "color: #51647c"><strong><?= $data['agent_cellphone_number'] ?></strong></span>
                                             </li>
                                             <li>
-                                                Landline: <span  style = "color: #28A745"><strong><?= $data['agent_landline'] ?></strong></span>
+                                                Landline: <span  style = "color: #51647c"><strong><?= $data['agent_landline'] ?></strong></span>
                                             </li>
 
                                     </ul>
                                     <p>Address.</p>
                                         <ul style = "list-style-type:none;padding:0px;line-height:1.5">
                                             <li>
-                                                Address Line1: <span  style = "color: #28A745"><strong><?= $data['add_line1'] ?></strong></span>
+                                                Address Line1: <span  style = "color: #51647c"><strong><?= $data['add_line1'] ?></strong></span>
                                             </li>
                                             <li>
-                                                Address Line 2: <span  style = "color: #28A745"><strong><?= $data['add_line2'] ?></strong></span>
+                                                Address Line 2: <span  style = "color: #51647c"><strong><?= $data['add_line2'] ?></strong></span>
                                             </li>
                                             <li>
-                                               City/Town: <span  style = "color: #28A745"><strong><?= $data['add_city'] ?></strong></span>
+                                               City/Town: <span  style = "color: #51647c"><strong><?= $data['add_city'] ?></strong></span>
                                             </li>
                                             <li>
-                                               Postal Code: <span  style = "color: #28A745"><strong><?= $data['add_postal_code'] ?></strong></span>
+                                               Postal Code: <span  style = "color: #51647c"><strong><?= $data['add_postal_code'] ?></strong></span>
                                             </li>
                                     </ul>
                                     <p>Next Of Kin.</p>
                                         <ul style = "list-style-type:none;padding:0px;line-height:1.5">
                                             <li>
-                                                Name: <span  style = "color: #28A745"><strong><?= $data['nok_name'] ?></strong></span>
+                                             Name: <span  style = "color: #51647c"><strong><?= $data['nok_name'] ?></strong></span>
                                             </li>
                                             <li>
-                                               Surname: <span  style = "color: #28A745"><strong><?= $data['nok_surname'] ?></strong></span>
+                                             Surname: <span  style = "color: #51647c"><strong><?= $data['nok_surname'] ?></strong></span>
                                             </li>
                                             <li>
-                                               CellNumber: <span  style = "color: #28A745"><strong><?= $data['nok_cell_number'] ?></strong></span>
+                                             Cell Number: <span  style = "color: #51647c"><strong><?= $data['nok_cell_number'] ?></strong></span>
                                         </li>
                                     </ul>
-                                    <p>Login into vanguard system for more details.</p>
-                                    <a href = "{{$base_url}}/admin" class = "button" >Log into system</a>
+                                    <p>Question Unswers.</p>
+                                        <ul style = "list-style-type:none;padding:0px;line-height:1.5">
+                                            <?php foreach($data['questions'] as $key => $questionObj) { ?>
+                                            <li>
+                                                <?= $questionObj->question ?>: <span  style = "color: #51647c"><strong><?= $data['question_anwsers'][$questionObj->question_id] ?></strong></span>
+                                            </li>
+                                           <?php } ?>
+                                        </ul>
                                 </td>
                             </tr>
                         </table>

@@ -500,16 +500,34 @@ class Authentication extends ClientsController
     
     }
     
+   //for testing puroses:
     public function sendAgentRegistrationEmail(){
+            
+        $questions = $this->db->get('tblagent_signup_questions')->result();
 
-        $data = $_POST;
         $this->load->library('email');
         $fromemail="innosela@gmail.com";
         $toemail = "innothetechgeek@gmail.com";
-        $subject = "Mail Subject is here";
+        $subject = "New Agent Registration";
         // $mesg = $this->load->view('template/email',$data,true);
         // or
-        $mesg = $this->load->view('email/agentsignup',$data,true);
+        $data = array(
+            'agent_name' => 'Ela',
+            'agent_landline' => '0833444554',
+            'agent_idnumber' => '54545454545',
+            'agent_cellphone_number' => '0834455456',
+            'agent_landline' => '021334456',
+            'add_line1' => '290 watergang',
+            'add_line2' => '',
+            'add_city' => 'Cape Town',
+            'add_postal_code' => '7600',
+            'nok_name' => 'Lary',
+            'nok_surname' => 'Page',
+            'questions' => $questions,
+            'question_anwsers' => $this->input->post('question_anwsers')
+        );
+
+        $mesg = $this->load->view('email/agentsignup',['data' =>  $data],true);
         
         $config=array(
 
@@ -521,7 +539,7 @@ class Authentication extends ClientsController
             // Port
             'smtp_port' => 2525,
             // User
-            'SMTPUser' => 'b5016198047a1d',
+            'smtp_user' => 'b5016198047a1d',
             // Pass
             'smtp_pass' => 'b08c6fc050f2e5',
             'newline' => "\r\n",
@@ -535,5 +553,7 @@ class Authentication extends ClientsController
         $this->email->subject($subject);
         $this->email->message($mesg);
         $mail = $this->email->send();
+
+        echo "here"; die();
     }
 }
