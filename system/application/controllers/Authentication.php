@@ -553,7 +553,5 @@ class Authentication extends ClientsController
         $this->email->subject($subject);
         $this->email->message($mesg);
         $mail = $this->email->send();
-
-        echo "here"; die();
     }
 }
