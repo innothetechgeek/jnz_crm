@@ -346,12 +346,28 @@ class Authentication extends ClientsController
         $this->layout();
 
     }
+    public function lead_signup(){
 
+        $this->view('leads/signup');
+        
+        if ($this->input->post()) {
+            $this->db->insert('tblleads', $_POST);
+        }
+      
+        $this->layout();
+    }
     public function agent_signup_successful(){
 
         $this->view('agentsignup_successful');
       
         $this->layout();
+    }
+
+    public function lead_signup_successful(){
+      
+        $this->view('leads/signup');
+        $this->layout();
+        
     }
 
     public function create_agent(){
