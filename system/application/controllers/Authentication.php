@@ -348,13 +348,17 @@ class Authentication extends ClientsController
     }
     public function lead_signup(){
 
-        $this->view('leads/signup');
+       
         
         if ($this->input->post()) {
+
             $this->db->insert('tblleads', $_POST);
+            redirect('authentication/lead_signup_successful');
+        }else{
+            $this->view('leads/signup');
+            $this->layout();
         }
       
-        $this->layout();
     }
     public function agent_signup_successful(){
 
@@ -365,9 +369,9 @@ class Authentication extends ClientsController
 
     public function lead_signup_successful(){
       
-        $this->view('leads/signup');
+        $this->view('leads/signup_successful');
         $this->layout();
-        
+
     }
 
     public function create_agent(){

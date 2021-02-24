@@ -12,8 +12,8 @@
   padding: 10px;">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center p-0 mt-3 mb-2">
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                <h2><strong>Agent Signup</strong></h2>
-                <p>Fill all form field to go to next step</p>
+                <h2><strong>Sign Up Sucessful </strong></h2>
+                <p>We'll get back to you shortly</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
                         <form id="msform" action = "agent_signup" method = "POST">

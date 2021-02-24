@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-        Compaigns
+    <?php echo get_option('companyname'); ?> - <?php echo _l('admin_auth_login_heading'); ?>
   </title>
 
   <?php echo app_compile_css('admin-auth'); ?>
@@ -202,9 +202,9 @@
 <?php if(file_exists(FCPATH.'assets/css/custom.css')){ ?>
   <link href="<?php echo base_url('assets/css/custom.css'); ?>" rel="stylesheet" id="custom-css">
 <?php } ?>
+<?php hooks()->do_action('app_admin_authentication_head'); ?>
 
-
-
-
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/agent_signup/agent-signup.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/js/agent_signup/agent-signup.js">
 
 </head>
