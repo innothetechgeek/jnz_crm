@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<?php $this->load->view('authentication/includes/head.php'); ?>
+<?php $this->load->view('agents/includes/head.php'); ?>
 <body class="">
    <div >
      <style>
