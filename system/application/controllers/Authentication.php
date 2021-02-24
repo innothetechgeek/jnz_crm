@@ -373,6 +373,7 @@ class Authentication extends ClientsController
             'phonenumber' => $this->input->post('agent_cellphone_number'),
             'idnumber' => $this->input->post('agent_idnumber'),
             'email' =>  $this->input->post('agent_email'),
+            'contact_type' => 'agent',
             'userid' => $insert_id,
             'password' => app_hash_password($this->input->post('password'))
         ];
