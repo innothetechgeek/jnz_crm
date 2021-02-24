@@ -60,6 +60,17 @@ class ClientsController extends App_Controller
          */
         $this->template['head'] = $this->load->view('themes/' . active_clients_theme() . '/head', $this->data, true);
 
+        $table = db_prefix() . 'contacts';
+        $this->db->where('userid', 20);
+        $active_user = $this->db->get($table)->row();
+ 
+        if($active_user->contact_type){
+
+            $this->template['head'] = $this->load->view('agents/includes/head', $this->data, true);
+
+            $this->data['subMenuEnabled']    = $this->use_submenu == false;
+        }
+
         $GLOBALS['customers_head'] = $this->template['head'];
 
         /**

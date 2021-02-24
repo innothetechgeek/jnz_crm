@@ -26,9 +26,29 @@ class Clients extends ClientsController
 
         $data['project_statuses'] = $this->projects_model->get_project_statuses();
         $data['title']          = get_company_name(get_client_user_id());
+
+        $sql = "SELECT * FROM tblcontacts WHERE user_id = ".$this->session->userdata('client_user_id');
+
+   
+       $table = db_prefix() . 'contacts';
+       $this->db->where('userid', 20);
+       $active_user = $this->db->get($table)->row();
+
+       if($active_user->contact_type){
+
         $this->data($data);
         $this->view('agents/campaigns');
         $this->layout();
+          
+
+       }else{
+           
+        $this->data($data);
+        $this->view('home');
+        $this->layout();
+           
+
+       }
     }
 
     public function announcements()

@@ -30,6 +30,10 @@
         border-color: #415165;
     }
 
+    .mg-top-5{
+        margin-top:5px;
+    }
+
     section {
         padding: 60px 0;
     }
@@ -45,7 +49,7 @@
         border: none;
         background: #ffffff;
     }
-
+/* 
     .image-flip:hover .backside,
     .image-flip.hover .backside {
         -webkit-transform: rotateY(0deg);
@@ -62,7 +66,7 @@
         -moz-transform: rotateY(180deg);
         -o-transform: rotateY(180deg);
         transform: rotateY(180deg);
-    }
+    } */
 
     .mainflip {
         -webkit-transition: 1s;
@@ -77,6 +81,11 @@
         position: relative;
     }
 
+     .card-body ul > li{
+        line-height: 1.9;
+     }
+
+
     .frontside {
         position: relative;
         -webkit-transform: rotateY(0deg);
@@ -85,6 +94,9 @@
         margin-bottom: 30px;
     }
 
+    .card-body{
+        padding: 1.25rem;
+    }
     .backside {
         position: absolute;
         top: 0;
@@ -120,7 +132,7 @@
 
     .frontside .card,
     .backside .card {
-        min-height: 312px;
+        height: 347px;
     }
 
     .backside .card a {
@@ -169,7 +181,7 @@
                         'Refer a client looking for insurance',
                         'Medical Aid or Gap Covers'
                     ],
-                 'image' => 'https://i.pinimg.com/originals/52/0f/bd/520fbdea80b7fd772967a046013ab25f.jpg'
+                 'image' => 'https://thumbs.dreamstime.com/z/south-african-money-notes-20915489.jpg'
             ],
             'EARN R500' => [
                 'referal_types' =>
@@ -177,14 +189,14 @@
                     'refer a client that needs an ADT alarm system',
                     'Mefer a client for cellphone contract'
                 ],
-                'image'=> 'https://i.pinimg.com/originals/52/0f/bd/520fbdea80b7fd772967a046013ab25f.jpg',
+                'image'=> 'https://us.123rf.com/450wm/lcswart/lcswart1605/lcswart160500004/56493842-stack-spread-selection-of-used-south-african-bank-notes.jpg?ver=6',
             ],
             'EARN R1000' => [
                 'referal_types' =>
                     [ 
                         'Refer a client that is looking to buy a new car.'
                     ],
-                 'image' => 'https://i.pinimg.com/originals/52/0f/bd/520fbdea80b7fd772967a046013ab25f.jpg'
+                 'image' => 'https://thumbs.dreamstime.com/z/pile-south-african-rand-notes-money-isolated-white-surface-space-text-featuring-nelson-mandela-pile-south-152084743.jpg'
             ],
             'EARN R3000' => [
                 'referal_types' =>
@@ -216,7 +228,7 @@
 
                                     <?php } ?>
                                 </li>
-                                <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm mg-top-5">Get referal link</a>
                             </div>
                         </div>
                     </div>
