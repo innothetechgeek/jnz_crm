@@ -249,6 +249,7 @@ input.invalid {
 }
 
 @media only screen and (max-width: 600px) {
+
     #mainRow{
         width:100% !important;
     }
@@ -267,5 +268,6 @@ input.invalid {
         float: left;
         position: relative;
     }
+    
 }
 
