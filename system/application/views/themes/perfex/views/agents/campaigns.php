@@ -6,6 +6,48 @@
          body{
             background: #eee !important;
          }
+
+         #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #495B71;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 60px;
+            font-size: 17px;
+        }
+
+        #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+        from {bottom: 0; opacity: 0;} 
+        to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+        from {bottom: 30px; opacity: 1;} 
+        to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+        }
      </style>
 
 <style>
@@ -228,9 +270,10 @@
 
                                     <?php } ?>
                                 </li>
-                                <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm mg-top-5">Get referal link</a>
+                                <input type = "hidden" id = "campain_1" value = "<?php echo base_url() ."authentication/lead_signup" ?>" />
+                                <input onclick="copyRereralLink('#campain_1')" data-referal-link = "test.com" class="btn btn-primary btn-sm mg-top-5" value = "Get referal link">
                             </div>
-                        </div>
+                        </div> 
                     </div>
                     <div class="backside">
                         <div class="card">
@@ -269,9 +312,26 @@
         <?php } ?>
 
     </div>
+    <div id="snackbar">Referal Link copied..</div>
 </div>
 </section>
 <!-- Team -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    function copyRereralLink(element) {
 
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($('#campain_1').val()).select();
+        document.execCommand("copy");
+        $temp.remove();
+
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+
+</script>
 </body>
 </html>
