@@ -31,10 +31,10 @@ class Clients extends ClientsController
 
    
        $table = db_prefix() . 'contacts';
-       $this->db->where('userid', 20);
+       $this->db->where('userid', $this->session->userdata('client_user_id'));
        $active_user = $this->db->get($table)->row();
 
-       if($active_user->contact_type){
+       if($active_user->contact_type == "agent"){
 
         $this->data($data);
         $this->view('agents/campaigns');

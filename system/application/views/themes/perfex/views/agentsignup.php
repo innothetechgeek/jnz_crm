@@ -16,7 +16,7 @@
                 <p>Fill all form field to go to next step</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                        <form id="msform" action = "agent_signup" method = "POST">
+                        <form id="msform" action = "agent_signup" method = "POST" autocomplete="nop">
                         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                             <!-- progressbar -->
                             <ul id="progressbar">

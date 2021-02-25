@@ -326,7 +326,7 @@ class Authentication extends ClientsController
             $this->create_agent_answers($agent_id);
             $this->create_agent_address($agent_id);
 
-            $payment_ref = $this->input->post('agent_name')." ".$this->input->post('suname');
+            $payment_ref = $this->input->post('agent_name');
             $this->generate_swify_payment_link($this->input->post('agent_cellphone_number'),$payment_ref);
             
 
@@ -490,7 +490,7 @@ class Authentication extends ClientsController
             $auth = base64_encode('jnzapi:jnzapi2020!');
             // echo $auth; exit;
             $request_url_base = "https://pay.swiffy.co.za/api";
-            $endpoint = "/v1/swiffy/recurring/payment-schedule";
+            $endpoint = "/v1/swiffy/payment-link";
 
             $verify_hostname = false;
             $curl = curl_init();
