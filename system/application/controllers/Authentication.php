@@ -352,11 +352,17 @@ class Authentication extends ClientsController
         
         if ($this->input->post()) {
 
+            $_POST['client_id'] =  get_contact_user_id();
             $this->db->insert('tblleads', $_POST);
             redirect('authentication/lead_signup_successful');
+
         }else{
+
+            $data['signup_reasons'] = $this->db->get('tblleads')->result_array();
+            $this->data($data);
             $this->view('leads/signup');
             $this->layout();
+            
         }
       
     }
@@ -368,7 +374,7 @@ class Authentication extends ClientsController
     }
 
     public function lead_signup_successful(){
-      
+       
         $this->view('leads/signup_successful');
         $this->layout();
 

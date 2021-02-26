@@ -312,7 +312,7 @@
         <?php } ?>
 
     </div>
-    <div id="snackbar">Referal Link copied..</div>
+    <div id="snackbar">Referal Link copied to clipboard</div>
 </div>
 </section>
 <!-- Team -->

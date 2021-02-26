@@ -65,6 +65,14 @@
                               </a>
                            </li>
                         <?php } ?>
+                        <?php if($active_user->contact_type == "agent"){ ?>
+
+                        <li class="customers-nav-item-company-info">
+                           <a href="<?php echo site_url('clients/leads'); ?>">
+                               My Leads
+                           </a>
+                        </li>
+                        <?php } ?>
                      
                      <?php } ?>
                      <?php if(can_logged_in_contact_update_credit_card()){ ?>

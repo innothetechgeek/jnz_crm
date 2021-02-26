@@ -123,6 +123,20 @@ class Clients extends ClientsController
         $this->layout();
     }
 
+    public function leads(){
+
+
+        $this->db->where('client_id',get_contact_user_id());
+        $data['leads'] = $this->db->get('tblleads')->result_array();
+
+
+        $this->data($data);
+        $this->view('leads/list');
+        $this->layout();
+        
+
+    }
+
     public function project($id)
     {
         if (!has_contact_permission('projects')) {

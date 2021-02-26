@@ -18,6 +18,10 @@ class Migration_Version_281 extends CI_Migration
                         'type' => 'VARCHAR',
                         'constraint' => '200',
                   ),
+                  'fk_compaign_id' => array(
+                        'type' => 'INT', 
+                     'constraint' => 10,
+                  )
 
             ));
 
@@ -25,28 +29,39 @@ class Migration_Version_281 extends CI_Migration
             $this->dbforge->create_table('lead_signup_reasons');
 
             $signup_reasons = [
-               
-                    'Vehicle tracking system',
-                    'Mtorplan',
-                    'Extended Vehicle warranty-refer vehicle owner',
-                    'Funeral Cover-lead only',
-                    'School Online Tutor System',
-                    'Refer a funeral policy client',
-                    'Refer a credit card client',
-                    'Refer a credit card client',
-                    'Refer a client for Loyality Program',
-                    'Refer a client looking for insurance',
-                    'Medical Aid or Gap Covers',
-                    'refer a client that needs an ADT alarm system',
-                    'Mefer a client for cellphone contract',
-                    'Mefer a client that wants to buy a house'
+                   //campain_id => signup reason
+                   1 => [
+                         'Vehicle tracking system',
+                        'Motorplan',
+                        'Extended Vehicle warranty',
+                        'Funeral Cover-lead only',
+                        'School Online Tutor System'
+                  ],
+                  2 => [
+                        'Funeral Policy',
+                        'Credit card',
+                        'Loyality Program'
+                  ],
+                   3 => [
+                         'Insurance',
+                        'Medical Aid or Gap Covers'
+                  ],
+                  4 => [
+                        'ADT alarm system',
+                        'Cellphone contract'
+                  ],
+                   6 => ['looking to buy a new car'],
+                   
+                   7 => ['I want to buy a house'],
                 
             ];
 
-            foreach($signup_reasons as $key => $reason){
-               
-                $this->db->insert('lead_signup_reasons', ['signup_reason'=>$reason]);
-                $this->db->insert_id();
+            foreach($signup_reasons as $compain_id => $reasons){
+
+               foreach($reasons as $index => $reason){
+                  $this->db->insert('lead_signup_reasons', ['signup_reason'=>$reason,'fk_compaign_id'=>$compain_id]);
+                  $this->db->insert_id();
+               }
 
             } 
 
