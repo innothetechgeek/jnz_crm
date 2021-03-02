@@ -7,7 +7,7 @@
       <th scope="col">Email</th>
       <th scope="col">Phone Number</th>
       <th scope="col">Id Number</th>
-      <th scope="col">Signed Up For</th>
+      <th scope="col">Signed Up Reason</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +17,7 @@
       <td><?=$lead['email']?></td>
       <td><?=$lead['phonenumber']?></td>
       <td><?=$lead['idnumber']?></td>
-      <td>-</td>
+      <td><?=$lead['signup_reason']?></td>
     <?php } ?>
     </tr>
   </tbody>

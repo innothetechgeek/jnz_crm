@@ -349,16 +349,16 @@ class Authentication extends ClientsController
     public function lead_signup(){
 
        
-        
+      
         if ($this->input->post()) {
-
+          
             $_POST['client_id'] =  get_contact_user_id();
             $this->db->insert('tblleads', $_POST);
             redirect('authentication/lead_signup_successful');
 
         }else{
 
-            $data['signup_reasons'] = $this->db->get('tblleads')->result_array();
+            $data['signup_reasons'] = $this->db->get('tbllead_signup_reasons')->result_array();
             $this->data($data);
             $this->view('leads/signup');
             $this->layout();

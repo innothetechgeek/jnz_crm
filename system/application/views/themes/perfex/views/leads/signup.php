@@ -38,23 +38,12 @@
                                     <h2 class="fs-title">Personal Information</h2>
                                     <input type="text" name="idnumber" placeholder="Identity Number" /> 
                                     <input type="text" name="name" placeholder="Name" /> 
-                                    <select type ="select" id = "signupreason"> 
-                                        <option value="volvo">What are you signin up for?</option>
-                                        <option value="volvo">Vehicle tracking system</option>
-                                        <option value="volvo">Mtorplan</option>
-                                        <option value="volvo">Extended Vehicle warranty-refer vehicle owner</option>
-                                        <option value="volvo">Funeral Cover-lead only</option>
-                                        <option value="volvo">Online Tutor System</option>
-                                        <option value="volvo">Funeral policy</option>
-                                        <option value="volvo">Credit card</option>
-                                        <option value="volvo">Credit card</option>
-                                        <option value="volvo">Loyality Program</option>
-                                        <option value="volvo">Insurance</option>
-                                        <option value="volvo"> Medical Aid or Gap Covers</option>
-                                        <option value="volvo"> ADT alarm system</option>
-                                        <option value="volvo">Cellphone contract</option>
-                                        <option value="volvo">Buy a house</option>
-                                    </select>
+                                    <option value="volvo">What are you signin up for?</option>
+                                    <select type ="select" id = "signupreason" name = "fk_signup_reason"> 
+                                        <?php foreach($signup_reasons as $index => $signup_reason) { ?>)
+                                            <option value="<?=  $signup_reason['id'] ?>"><?= $signup_reason['signup_reason'] ?> </option>
+                                        <?php } ?>
+                                    </select> <br/><br/>
                                     <input type="number" name="phonenumber" placeholder="Cell Phone Number" /> 
                                     <input type="email"  data-not-required = "true" name="Email" placeholder="email" /> 
                                 </div> 

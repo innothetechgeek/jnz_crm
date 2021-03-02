@@ -129,6 +129,10 @@ class Clients extends ClientsController
         $this->db->where('client_id',get_contact_user_id());
         $data['leads'] = $this->db->get('tblleads')->result_array();
 
+        $this->db->select('*');
+        $this->db->from('tblleads');
+        $this->db->join('tbllead_signup_reasons', 'tbllead_signup_reasons.id = tblleads.fk_signup_reason');
+        $data['leads'] = $this->db->get()->result_array();;
 
         $this->data($data);
         $this->view('leads/list');
