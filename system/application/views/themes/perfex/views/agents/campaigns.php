@@ -17,10 +17,15 @@
             border-radius: 2px;
             padding: 16px;
             position: fixed;
-            z-index: 1;
+            z-index: 5000;
             left: 50%;
             bottom: 60px;
             font-size: 17px;
+        }
+
+        .btn-disabled{
+            background:#7d868e !important;
+            border: none;
         }
 
         #snackbar.show {
@@ -48,6 +53,10 @@
         from {bottom: 30px; opacity: 1;}
         to {bottom: 0; opacity: 0;}
         }
+
+        .campain-disabled{
+            color: grey !important;
+        }
      </style>
 
 <style>
@@ -57,19 +66,14 @@
     #team {
         background: #eee !important;
     }
-
-    .btn-primary:hover,
-    .btn-primary:focus {
-        background-color: #108d6f;
-        border-color: #108d6f;
-        box-shadow: none;
-        outline: none;
-    }
-
     .btn-primary {
         color: #fff;
         background-color: #415165;
         border-color: #415165;
+    }
+
+    .btn-primary:active:focus{
+        background:initial;
     }
 
     .mg-top-5{
@@ -179,12 +183,12 @@
 
     .backside .card a {
         font-size: 18px;
-        color: #415165 !important;
+        color: #415165;
     }
 
     .frontside .card .card-title,
     .backside .card .card-title {
-        color: #415165 !important;
+        color: #415165'
     }
 
     .frontside .card .card-body img {
@@ -200,6 +204,7 @@
     $campaigns = [
             'EARN R50 when you sign a client for:' => [
                 'referal_types' => [
+                'Loan Application',
                 'Vehicle tracking system-lead only not sale',
                 'Motorplan-refer lead for vehicle owner for motorplan',
                 'Extended Vehicle warranty-refer vehicle owner',
@@ -253,25 +258,35 @@
 <div class="container">
     <h5 class="section-title h1">OUR CAMPAINS</h5>
     <div class="row">
-        <?php foreach($campaigns as $earning => $earning_details) { ?>
+        <?php 
+        
+         $i = 1;
+        foreach($campaigns as $earning => $earning_details) { ?>
         <!-- Campain -->
         <div class="col-xs-12 col-sm-6 col-md-4">
+          <?php $is_disabled =  $i != 1 ?  "campain-disabled" : ""; ?>
             <div class="image-flip" >
                 <div class="mainflip flip-0">
                     <div class="frontside">
-                        <div class="card">
+                        <div class="card <?= $is_disabled ?>">
                             <div class="card-body text-center">
                                 <p><img class=" img-fluid" src="<?= $earning_details['image'] ?>" alt="card image"></p>
-                                <h4 class="card-title"><?php echo $earning ?></h4>
+                                <h4 class="card-title  <?= $is_disabled ?>"><?php echo $earning ?></h4>
                                  <ul>
-                                    <?php foreach($earning_details['referal_types'] as $key => $referal_type) { ?>
+                                   
+                                      <?php  foreach($earning_details['referal_types'] as $key => $referal_type) { ?>
                                         
                                         <li> <?= $referal_type ?> </li>
-
-                                    <?php } ?>
+                                        
+                                    <?php    
+                                     } 
+                                    ?>
                                 </li>
-                                <input type = "hidden" id = "campain_1" value = "<?php echo base_url() ."authentication/lead_signup" ?>" />
-                                <input onclick="copyRereralLink('#campain_1')" data-referal-link = "test.com" class="btn btn-primary btn-sm mg-top-5" value = "Get referal link">
+                                <?php 
+                                    $is_btn_disabled = $i != 1 ? "btn-disabled" : "";
+                                    $btn_text =  $i != 1 ? "Coming soon" : "GET REFERAL LINK";
+                                ?>
+                                <input class="btn btn-primary <?=$is_btn_disabled?>" data-toggle="modal" data-target="#exampleModal" data-referal-link = "test.com" class="btn btn-primary btn-sm mg-top-5" value = "<?=  $btn_text ?>">
                             </div>
                         </div> 
                     </div>
@@ -309,10 +324,76 @@
             </div>
         </div>
 
-        <?php } ?>
+        <?php 
+            $i++; 
+            } 
+        ?>
 
     </div>
     <div id="snackbar">Referal Link copied to clipboard</div>
+         
+         <?php   
+         
+         /* The campaign we'll launch with, please note that I'll move these campains to a database later on
+              it looks like the client isn't 100% sure how the project should work at this point, so chances are I might have
+              to change a couple of things..it's easy to change data and array structure than to change data in the database and table structures
+         */
+         $launch_campaign_referal_types =   [
+                        'EARN R50 when you sign a client for:' => [
+                            'referal_types' => [
+                            'Loan Application',
+                            'Vehicle tracking system-lead only not sale  (coming soon)',
+                            'Motorplan-refer lead for vehicle owner for motorplan (coming soon)',
+                            'Extended Vehicle warranty-refer vehicle owner  (coming soon)',
+                            'Funeral Cover-lead only  (coming soon)',
+                            'School Online Tutor System  (coming soon)'],]
+                            ];  ?>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Choose a campaign</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <select name="campains" id="campains">
+            <?php 
+                $i = 1;
+                foreach($launch_campaign_referal_types as $earning => $earning_details) { ?>
+                    <?php foreach($earning_details['referal_types'] as $key => $referal_type) { ?>
+
+                        <?php $is_disabled = $i != 1 ? "disabled" : '' ?>
+                        <option value="" <?= $is_disabled ?> > <?= $referal_type ?></option>
+                    <?php
+                     $i++;
+                } ?>
+            <?php } 
+            
+            ?>
+        </select>
+           <h1>Terms and Conditions</h1>
+         <ul style = "list-style-type: circle; margin-left:15px">
+            <li>You can charge your client a minimum of R50 upto R100 cash to do a loan application for your client.</li>
+            <li>We recommend R50 but it is your Business and you can charge what you see fit.</li>
+            <li>This cash goes in your pocket.<li>
+            <li>Please make your client aware that your charge has nothing to do with the loan being approved or not,it is an admin charge that you charge as this covers your time and internet cost..</li>
+            <li>When you fill the details on the form and submit (next),client will also get a free credit report and the client is prompted to see if he needs other financial services as well.</li>
+            <li>The client will then be client immediately by Bank call centre to finalise his loan(this call is not for his account so he benefits with a free call to process his application.</li>
+            <li>A BUSINESS Partner can do as many as he wishes.</li>
+            <li>Please note this service must be done between 8 am and 4.30 pm as this is in line with banking call centres.</li>   
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type = "hidden" id = "campain_1" value = "https://sa.formstack.com/forms/igen_personal_loan_capture_form" />
+        <button  onclick="copyRereralLink('#campain_1')"  type="button" class="btn btn-primary">Copy Referal Link</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 </section>
 <!-- Team -->
