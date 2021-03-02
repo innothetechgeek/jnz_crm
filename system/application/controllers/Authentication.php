@@ -345,6 +345,8 @@ class Authentication extends ClientsController
       
         $this->layout();
 
+        
+
     }
     public function lead_signup(){
 
